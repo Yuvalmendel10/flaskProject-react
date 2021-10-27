@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import 'tachyons';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
+import OpenPage from './components/OpenPage/OpenPage';
+import Navigation from './components/Navigation/Navigation';
 
-function App() {
+
+const App = () => {
+
+  const [route, setRoute] = useState('OpenPage');
+ 
+
+  const onRouteChange =(route)=> {
+    setRoute(route);
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+
+        <Navigation onRouteChange={onRouteChange}
+                    route={route}/>
+
+     {
+        route==='signin' ?
+        <SignIn onRouteChange={onRouteChange} />
+        : 
+        route==='signup' ?
+        <SignUp onRouteChange={onRouteChange} />
+        : 
+        /*route==='OpenPage' ?*/
+        <OpenPage onRouteChange={onRouteChange} />
+
+     }
+
     </div>
   );
 }
